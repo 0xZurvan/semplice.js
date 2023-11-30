@@ -9,9 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.1.2",
     "@stylistic/eslint-plugin-ts": "^1.4.1",
-    "eslint": "^8.54.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
   },

@@ -1,13 +1,11 @@
-import type { Provider } from 'ethers'
+import type { BigNumberish, Provider } from 'ethers'
 
-// Contract type definition
-export interface IContractInstance {
-  ABI: ContractABI[]
+interface ContractInstance {
+  abi: ContractABI[]
   address: string
   provider: Provider
 }
 
-// ABI type definition
 interface ContractABI {
   anonymous?: boolean
   inputs?: Array<{
@@ -23,4 +21,24 @@ interface ContractABI {
   }>
   stateMutability?: string
   type?: string
+}
+
+interface Function<T extends unknown[] = unknown[], U = any> {
+  (...args: T): Promise<U>
+}
+
+interface FunctionExecutionParams {
+  func: Function
+  loadingToggle?: (loading?: boolean) => void
+  options?: {
+    value: BigNumberish
+    gasLimit: string
+    maxGasLimit: string
+  }
+}
+
+export type {
+  FunctionExecutionParams,
+  Function,
+  ContractInstance,
 }

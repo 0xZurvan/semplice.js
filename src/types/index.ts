@@ -10,13 +10,17 @@ export interface IContractInstance {
 // ABI type definition
 interface ContractABI {
   anonymous?: boolean
-  indexed?: boolean
-  inputs?: {
+  inputs?: Array<{
     internalType: string
     name: string
     type: string
-  }[]
+  }>
   name?: string
-  stateMutability?: 'nonpayable' | 'payable' | 'view' | 'pure'
-  type: 'constructor' | 'event' | 'function'
+  outputs?: Array<{
+    internalType: string
+    name: string
+    type: string
+  }>
+  stateMutability?: string
+  type?: string
 }

@@ -5,6 +5,12 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@abi-example/*": ["./src/abi-example/*"],
+      "@contracts/*": ["./src/core/contracts/*"],
+      "@address/*": ["./src/core/address/*"],
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

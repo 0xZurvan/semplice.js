@@ -1,25 +1,32 @@
-import ethers, { Contract } from 'ethers'
-import type { ContractInstance, Function } from '../types'
+import { Contract, FunctionFragment } from 'ethers'
+import type { ContractInstance, Function } from '../../types/types'
 
 type MethodsRecord<T extends Record<string, Function>> = {
   [K in keyof T]: Function<Parameters<T[K]>, ReturnType<T[K]>>;
 }
 
-export function defineContractInstance({ abi, address, provider }: ContractInstance): Contract {
-  const contract = new Contract(address, abi, provider)
+export function defineContractInstance({ abi, address, provider, signer }: ContractInstance): Contract | undefined {
+  let contract
+  if (provider)
+    contract = new Contract(address, abi, provider)
+
+  else if (signer)
+    contract = new Contract(address, abi, signer)
+
   return contract
 }
 
-export function extractMethods<T extends Record<string, Function>>(
+export async function extractMethods<T extends Record<string, Function>>(
   contract: Contract,
-): MethodsRecord<T> {
+): Promise<MethodsRecord<T>>  {
+
   const contractInterface = contract.interface
 
   const methods: MethodsRecord<T> = contractInterface.fragments
     .filter(fragment => fragment.type === 'function')
     .reduce<MethodsRecord<T>>((acc, func) => {
-      if (ethers.FunctionFragment.isFunction(func)) {
-        const functionFragment = func as ethers.FunctionFragment
+      if (FunctionFragment.isFunction(func)) {
+        const functionFragment = func as FunctionFragment
         acc[functionFragment.name as keyof T] = async (...args: Parameters<T[keyof T]>) => {
           const result = await contract[functionFragment.name](...args)
           return result

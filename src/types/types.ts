@@ -1,9 +1,10 @@
-import type { BigNumberish, Provider } from 'ethers'
+import type { BigNumberish, JsonRpcProvider, JsonRpcSigner } from 'ethers'
 
 interface ContractInstance {
   abi: ContractABI[]
   address: string
-  provider: Provider
+  provider?: JsonRpcProvider | undefined
+  signer?: JsonRpcSigner | undefined
 }
 
 interface ContractABI {

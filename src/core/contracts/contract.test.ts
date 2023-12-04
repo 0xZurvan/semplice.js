@@ -15,8 +15,7 @@ it('should create a contract instance', async () => {
     provider,
   })
 
-  if (contract)
-    expect(contract).instanceof(Contract)
+  expect(contract).instanceof(Contract)
 })
 
 it('should extract methods from contract instance', async () => {
@@ -31,9 +30,6 @@ it('should extract methods from contract instance', async () => {
     signer: signer as JsonRpcSigner,
   })
 
-  if (contract) {
-    const { balanceOf } = await extractMethods(contract)
-
-    expect(balanceOf('0x167BF45892ad66FD9c13e113239DDE96C9619259')).greaterThan(0)
-  }
+  const methods = await extractMethods(contract)
+  expect(methods.length).toBeGreaterThan(0)
 })

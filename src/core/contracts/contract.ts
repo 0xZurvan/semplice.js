@@ -5,12 +5,10 @@ type MethodsRecord<T extends Record<string, Function>> = {
   [K in keyof T]: Function<Parameters<T[K]>, ReturnType<T[K]>>;
 }
 
-export function defineContractInstance({ abi, address, provider, signer }: ContractInstance): Contract | undefined {
-  let contract
-  if (provider)
-    contract = new Contract(address, abi, provider)
+export function defineContractInstance({ abi, address, provider, signer }: ContractInstance): Contract {
+  let contract = new Contract(address, abi, provider)
 
-  else if (signer)
+  if (signer)
     contract = new Contract(address, abi, signer)
 
   return contract
@@ -18,8 +16,7 @@ export function defineContractInstance({ abi, address, provider, signer }: Contr
 
 export async function extractMethods<T extends Record<string, Function>>(
   contract: Contract,
-): Promise<MethodsRecord<T>>  {
-
+): Promise<MethodsRecord<T>> {
   const contractInterface = contract.interface
 
   const methods: MethodsRecord<T> = contractInterface.fragments

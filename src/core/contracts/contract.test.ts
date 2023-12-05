@@ -1,13 +1,13 @@
 import { expect, it } from 'vitest'
-import type { JsonRpcSigner } from 'ethers'
-import { Contract, JsonRpcProvider } from 'ethers'
+import { Contract, JsonRpcProvider, ethers } from 'ethers'
 import ABI from '../../abi-example/ABI.json'
+import { connectWallet } from '../address/address'
 import { defineContractInstance, extractMethods } from './contract'
 
 it('should create a contract instance', async () => {
   let provider
   if (typeof window !== 'undefined' && window.ethereum)
-    provider = new JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/ckN344g49RcvfHyjzwu3QUPKl71HDLnk')
+    provider = new JsonRpcProvider( )
 
   const contract = defineContractInstance({
     abi: ABI.abi,
@@ -19,17 +19,19 @@ it('should create a contract instance', async () => {
 })
 
 it('should extract methods from contract instance', async () => {
-  let provider
-  if (typeof window !== 'undefined' && window.ethereum)
-    provider = new JsonRpcProvider('https://eth-sepolia.g.alchemy.com/v2/ckN344g49RcvfHyjzwu3QUPKl71HDLnk')
+  const wallet = await connectWallet()
+  if(!wallet) 
+    return undefined
 
-  const signer = await provider?.getSigner('0x9366923F46c2397B5Cc7c5Bf57fdB1459650FFa1')
   const contract = defineContractInstance({
     abi: ABI.abi,
     address: '0x167BF45892ad66FD9c13e113239DDE96C9619259', // MintCross sepolia address
-    signer: signer as JsonRpcSigner,
+    signer: wallet.signer,
   })
 
-  const methods = await extractMethods(contract)
-  expect(methods.length).toBeGreaterThan(0)
+  const { balanceOf, buy } = await extractMethods(contract)
+  await buy(1 * 1e18)
+  const balance = await balanceOf('0x9366923F46c2397B5Cc7c5Bf57fdB1459650FFa1')
+
+  expect(balance).toEqual(ethers.parseUnits('7', 18))
 })

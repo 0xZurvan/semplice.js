@@ -2,7 +2,7 @@ import { expect, it } from 'vitest'
 import { Contract, JsonRpcProvider, ethers } from 'ethers'
 import ABI from '../../abi-example/ABI.json'
 import { connectWallet } from '../address/address'
-import { defineContract, extractMethods } from './contract'
+import { defineContract, useContract } from './contract'
 
 it('should create a contract instance', async () => {
   let provider
@@ -29,7 +29,7 @@ it('should extract methods from contract instance', async () => {
     signer: wallet.signer,
   })
 
-  const { balanceOf, buy } = await extractMethods(contract)
+  const { balanceOf, buy } = await useContract(contract)
   await buy(1 * 1e18)
   const balance = await balanceOf('0x9366923F46c2397B5Cc7c5Bf57fdB1459650FFa1')
 

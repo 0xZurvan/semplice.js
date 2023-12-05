@@ -1,10 +1,8 @@
 {
   "name": "vite-dapp-plugin",
-  "private": false,
-  "version": "0.0.0",
   "type": "module",
-  "main": "./dist/contract.cjs",
-  "module": "./dist/contract.ts",
+  "version": "0.0.0",
+  "private": false,
   "exports": {
     ".": {
       "import": "./dist/contract.ts",
@@ -15,6 +13,8 @@
       "require": "./dist/address.cjs"
     }
   },
+  "main": "./dist/contract.cjs",
+  "module": "./dist/contract.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -22,6 +22,11 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "ethers": "^6.9.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.1.2",
@@ -31,11 +36,6 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vitest": "^0.34.6"
-  },
-  "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
-    "ethers": "^6.9.0"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

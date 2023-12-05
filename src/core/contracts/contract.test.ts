@@ -2,14 +2,14 @@ import { expect, it } from 'vitest'
 import { Contract, JsonRpcProvider, ethers } from 'ethers'
 import ABI from '../../abi-example/ABI.json'
 import { connectWallet } from '../address/address'
-import { defineContractInstance, extractMethods } from './contract'
+import { defineContract, extractMethods } from './contract'
 
 it('should create a contract instance', async () => {
   let provider
   if (typeof window !== 'undefined' && window.ethereum)
     provider = new JsonRpcProvider( )
 
-  const contract = defineContractInstance({
+  const contract = defineContract({
     abi: ABI.abi,
     address: '0x167BF45892ad66FD9c13e113239DDE96C9619259', // MintCross sepolia address
     provider,
@@ -23,7 +23,7 @@ it('should extract methods from contract instance', async () => {
   if(!wallet) 
     return undefined
 
-  const contract = defineContractInstance({
+  const contract = defineContract({
     abi: ABI.abi,
     address: '0x167BF45892ad66FD9c13e113239DDE96C9619259', // MintCross sepolia address
     signer: wallet.signer,

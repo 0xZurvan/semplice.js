@@ -5,12 +5,10 @@ type MethodsRecord<T extends Record<string, Function>> = {
   [K in keyof T]: Function<Parameters<T[K]>, ReturnType<T[K]>>;
 }
 
-export function defineContractInstance({ abi, address, provider, signer }: ContractInstance): Contract {
+export function defineContract({ abi, address, provider, signer }: ContractInstance): Contract {
   let contract = new Contract(address, abi, provider)
-
   if (signer)
     contract = new Contract(address, abi, signer)
-
   return contract
 }
 

@@ -1,8 +1,20 @@
 {
-  "name": "vdapp",
-  "private": true,
-  "version": "0.0.0",
+  "name": "vite-dapp-plugin",
+  "private": false,
+  "version": "0.0.1",
   "type": "module",
+  "main": "./dist/contract.cjs",
+  "module": "./dist/contract.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/contract.ts",
+      "require": "./dist/contract.cjs"
+    },
+    "./address": {
+      "import": "./dist/address.ts",
+      "require": "./dist/address.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

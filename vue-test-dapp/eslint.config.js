@@ -1,6 +1,6 @@
 import antfu from '@antfu/eslint-config'
 import perfectionist from 'eslint-plugin-perfectionist'
-import prettier from 'eslint-plugin-prettier'
+import prettier from '@antfu/eslint-plugin-prettier'
 
 export default antfu({
   stylistic: {
@@ -8,10 +8,9 @@ export default antfu({
     quotes: 'single', // or 'double'
   },
 
-  formatters: {
-    css: true, // by default use Prettier
-    html: true, // by default use Prettier
-    markdown: 'prettier', // use prettier for markdown
+  prettier: {
+    css: true,
+    html: true
   },
 
   // TypeScript and Vue are auto-detected, you can also explicitly enable them:
@@ -30,10 +29,9 @@ export default antfu({
 
   plugins: {
     perfectionist,
-    prettier,
+    prettier
   },
   rules: {
     'perfectionist/sort-interfaces': 'error',
-    'prettier/prettier': 'error',
   },
 })

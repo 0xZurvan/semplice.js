@@ -1,5 +1,5 @@
 import { Contract, FunctionFragment } from 'ethers'
-import type { ContractInstance, Function } from '../../types/types'
+import type { ContractInstance, Function } from '../types/contract'
 
 type MethodsRecord<T extends Record<string, Function>> = {
   [K in keyof T]: Function<Parameters<T[K]>, ReturnType<T[K]>>;

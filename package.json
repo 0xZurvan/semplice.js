@@ -3,22 +3,24 @@
   "type": "module",
   "version": "0.0.0",
   "private": false,
+  "types": "./dist/contract.d.ts",
+  "files": ["./dist/*"],
+  "main": "./dist/contract.ts",
+  "module": "./dist/contract.cjs",
   "exports": {
     ".": {
+      "types": "./dist/contract.d.ts",
       "import": "./dist/contract.ts",
       "require": "./dist/contract.cjs"
     },
     "./address": {
+      "types": "./dist/address.d.ts",
       "import": "./dist/address.ts",
       "require": "./dist/address.cjs"
     }
   },
-  "main": "./dist/contract.cjs",
-  "module": "./dist/contract.ts",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
+    "build": "tsup ./src/core --dts --format cjs,esm --tsconfig tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest"
@@ -33,7 +35,8 @@
     "@stylistic/eslint-plugin-ts": "^1.4.1",
     "eslint": "^8.54.0",
     "eslint-plugin-perfectionist": "^2.5.0",
-    "typescript": "^5.2.2",
+    "tsup": "*",
+    "typescript": "*",
     "vite": "^5.0.0",
     "vitest": "^0.34.6"
   },

@@ -1,11 +1,16 @@
 <script setup lang="ts">
-const hello = "hello"
-console.log(hello)
+
+import { defineContract } from 'vite-dapp-plugin'
+const contract = defineContract({
+  abi: "",
+  address: "",
+  provider: ""
+})
 
 </script>
 
 <template>
-  <h1>Hello</h1> 
+  <h1>Hello</h1>
 </template>
 
 

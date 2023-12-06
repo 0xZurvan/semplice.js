@@ -1,6 +1,8 @@
 import antfu from '@antfu/eslint-config'
 import perfectionist from 'eslint-plugin-perfectionist'
-import prettier from '@antfu/eslint-plugin-prettier'
+import { FlatCompat } from '@eslint/eslintrc'
+
+const compat = new FlatCompat()
 
 export default antfu({
   stylistic: {
@@ -8,9 +10,9 @@ export default antfu({
     quotes: 'single', // or 'double'
   },
 
-  prettier: {
-    css: true,
-    html: true
+  formatters: {
+    css: true, // by default use Prettier
+    html: true, // by default use Prettier
   },
 
   // TypeScript and Vue are auto-detected, you can also explicitly enable them:
@@ -24,14 +26,19 @@ export default antfu({
   // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
   ignores: [
     './fixtures',
-    // ...globs
   ],
 
   plugins: {
-    perfectionist,
-    prettier
+    perfectionist
   },
   rules: {
     'perfectionist/sort-interfaces': 'error',
   },
+
+  ...compat.config({
+    extends: [
+      'eslint:recommended',
+      // Other extends...
+    ],
+  })
 })

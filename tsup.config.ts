@@ -8,8 +8,7 @@ export default defineConfig({
 
   outExtension({ format }) {
     return {
-      js: `.${format}.js`,
-      ts: `.${format}.ts`,
+      js: `.${format}.js`
     }
   },
 

@@ -11,5 +11,7 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "outDir": "./dist",
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }

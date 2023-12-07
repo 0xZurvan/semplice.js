@@ -4,22 +4,22 @@
   "version": "0.0.0",
   "private": false,
   "types": "./dist/contract.d.ts",
-  "main": "./dist/contract.cts",
-  "module": "./dist/contract.ts",
+  "main": "./dist/contract.cjs.js",
+  "module": "./dist/contract.esm.js",
   "exports": {
     ".": {
       "types": "./dist/contract.d.ts",
-      "import": "./dist/contract.ts",
-      "require": "./dist/contract.cjs"
+      "import": "./dist/contract.esm.js",
+      "require": "./dist/contract.cjs.js"
     },
     "./address": {
       "types": "./dist/address.d.ts",
-      "import": "./dist/address.ts",
-      "require": "./dist/address.cjs"
+      "import": "./dist/address.esm.js",
+      "require": "./dist/address.cjs.js"
     }
   },
   "scripts": {
-    "build": "tsup ./src/core/contract.ts ./src/core/address.ts --dts --format cjs,esm --tsconfig tsconfig.json",
+    "build": "tsup ./src/core --dts --format cjs,esm --tsconfig tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest"

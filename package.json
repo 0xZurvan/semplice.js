@@ -26,12 +26,16 @@
     }
   },
   "scripts": {
-    "build": "tsup tsup-node ./src/core --dts --format cjs,esm --tsconfig tsconfig.json",
+    "build": "tsup tsup-node ./src/core --dts --format cjs,esm --tsconfig tsconfig.json vite build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "ethers": "*"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^2.1.2",
     "@stylistic/eslint-plugin-ts": "^1.4.1",
@@ -40,10 +44,7 @@
     "tsup": "*",
     "typescript": "*",
     "vite": "^5.0.0",
-    "vitest": "^0.34.6",
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
-    "ethers": "*"
+    "vitest": "^0.34.6"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

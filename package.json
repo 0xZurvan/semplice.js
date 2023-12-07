@@ -18,19 +18,20 @@
       "types": "./dist/address.d.ts",
       "import": "./dist/address.esm.js",
       "require": "./dist/address.cjs.js"
+    },
+    "./provider": {
+      "types": "./dist/provider.d.ts",
+      "import": "./dist/provider.esm.js",
+      "require": "./dist/provider.cjs.js"
     }
   },
   "scripts": {
-    "build": "tsup ./src/core --dts --format cjs,esm --tsconfig tsconfig.json",
+    "build": "tsup tsup-node ./src/core --dts --format cjs,esm --tsconfig tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest"
   },
-  "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.13.1",
-    "@typescript-eslint/parser": "^6.13.1",
-    "ethers": "^6.9.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@antfu/eslint-config": "^2.1.2",
     "@stylistic/eslint-plugin-ts": "^1.4.1",
@@ -39,7 +40,10 @@
     "tsup": "*",
     "typescript": "*",
     "vite": "^5.0.0",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "@typescript-eslint/eslint-plugin": "^6.13.1",
+    "@typescript-eslint/parser": "^6.13.1",
+    "ethers": "*"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

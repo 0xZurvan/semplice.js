@@ -40,9 +40,9 @@ export function defineContract({ abi, address, provider, signer }: ContractInsta
   return contract
 }
 
-export async function useContract<T extends Record<string, Function>>(
+export function useContract<T extends Record<string, Function>>(
   contract: Contract,
-): Promise<MethodsRecord<T>> {
+): MethodsRecord<T> {
   const contractInterface = contract.interface
 
   const methods: MethodsRecord<T> = contractInterface.fragments

@@ -1,5 +1,33 @@
 import { Contract, FunctionFragment } from 'ethers'
-import type { ContractInstance, Function } from '../types/contract'
+import type { JsonRpcProvider, JsonRpcSigner } from 'ethers'
+
+interface ContractInstance {
+  abi: ContractABI[]
+  address: string
+  provider?: JsonRpcProvider | undefined
+  signer?: JsonRpcSigner | undefined
+}
+
+interface ContractABI {
+  anonymous?: boolean
+  inputs?: Array<{
+    internalType: string
+    name: string
+    type: string
+  }>
+  name?: string
+  outputs?: Array<{
+    internalType: string
+    name: string
+    type: string
+  }>
+  stateMutability?: string
+  type?: string
+}
+
+interface Function<T extends unknown[] = unknown[], U = any> {
+  (...args: T): Promise<U>
+}
 
 type MethodsRecord<T extends Record<string, Function>> = {
   [K in keyof T]: Function<Parameters<T[K]>, ReturnType<T[K]>>;
@@ -32,15 +60,3 @@ export async function useContract<T extends Record<string, Function>>(
 
   return methods
 }
-
-// check if it is type payable
-// check if
-/* export async function executeMethod() {
-  try {
-    if() {
-
-    }
-  } catch (error) {
-    console.error(error)
-  }
-} */

@@ -4,9 +4,8 @@
   "version": "0.0.0",
   "private": false,
   "types": "./dist/contract.d.ts",
-  "files": ["./dist/*"],
-  "main": "./dist/contract.ts",
-  "module": "./dist/contract.cjs",
+  "main": "./dist/contract.cts",
+  "module": "./dist/contract.ts",
   "exports": {
     ".": {
       "types": "./dist/contract.d.ts",
@@ -20,7 +19,7 @@
     }
   },
   "scripts": {
-    "build": "tsup ./src/core --dts --format cjs,esm --tsconfig tsconfig.json",
+    "build": "tsup ./src/core/contract.ts ./src/core/address.ts --dts --format cjs,esm --tsconfig tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest"

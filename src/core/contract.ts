@@ -1,47 +1,32 @@
-import { Contract, FunctionFragment } from 'ethers'
-import type { JsonRpcProvider, JsonRpcSigner } from 'ethers'
+import { Contract, FunctionFragment, JsonRpcSigner } from 'ethers'
+import type { ContractInstance, Function, MethodsRecord } from '../types/types'
 
-interface ContractInstance {
-  abi: ContractABI[]
-  address: string
-  provider?: JsonRpcProvider | undefined
-  signer?: JsonRpcSigner | undefined
-}
+export * from 'ethers'
 
-interface ContractABI {
-  anonymous?: boolean
-  inputs?: Array<{
-    internalType: string
-    name: string
-    type: string
-  }>
-  name?: string
-  outputs?: Array<{
-    internalType: string
-    name: string
-    type: string
-  }>
-  stateMutability?: string
-  type?: string
-}
-
-interface Function<T extends unknown[] = unknown[], U = any> {
-  (...args: T): Promise<U>
-}
-
-type MethodsRecord<T extends Record<string, Function>> = {
-  [K in keyof T]: Function<Parameters<T[K]>, ReturnType<T[K]>>;
-}
-
-export function defineContract({ abi, address, provider, signer }: ContractInstance): Contract {
-  let contract = new Contract(address, abi, provider)
-  if (signer)
-    contract = new Contract(address, abi, signer)
-  return contract
+export async function defineContract({ abi, address, provider, type = 'call' }: ContractInstance): Promise<Contract | undefined> {
+  try {
+    let contract: Contract
+    if (type === 'call' && provider) {
+      const signer = await provider.getSigner()
+      contract = new Contract(address, abi, signer)
+      // eslint-disable-next-line no-console
+      console.log('contract', contract)
+    }
+    else {
+      contract = new Contract(address, abi, provider)
+      // eslint-disable-next-line no-console
+      console.log('contract', contract)
+    }
+    
+    return contract
+  }
+  catch (error) {
+    console.error(error)
+  }
 }
 
 export function useContract<T extends Record<string, Function>>(
-  contract: Contract,
+  contract: Contract
 ): MethodsRecord<T> {
   const contractInterface = contract.interface
 

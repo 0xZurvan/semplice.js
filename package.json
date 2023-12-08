@@ -5,7 +5,7 @@
   "type": "module",
   "version": "0.0.0",
   "private": false,
-  "types": "./dist/contract.d.ts",
+  "types": "./dist/types-Y4ApQfgA.d.ts",
   "main": "./dist/contract.cjs.js",
   "module": "./dist/contract.esm.js",
   "exports": {
@@ -20,9 +20,9 @@
       "require": "./dist/address.cjs.js"
     },
     "./provider": {
-      "types": "./dist/provider.d.ts",
-      "import": "./dist/provider.esm.js",
-      "require": "./dist/provider.cjs.js"
+      "types": "./dist/runner.d.ts",
+      "import": "./dist/runner.esm.js",
+      "require": "./dist/runner.cjs.js"
     }
   },
   "scripts": {

@@ -10,7 +10,7 @@ export default defineConfig({
       entry: [
         path.resolve(__dirname, 'src/core/contract.ts'),
         path.resolve(__dirname, 'src/core/address.ts'),
-        path.resolve(__dirname, 'src/core/provider.ts'),
+        path.resolve(__dirname, 'src/core/runner.ts'),
       ],
     },
   },

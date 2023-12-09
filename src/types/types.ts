@@ -1,4 +1,4 @@
-import type { BrowserProvider, JsonRpcProvider, JsonRpcSigner } from 'ethers'
+import type { BrowserProvider, JsonRpcProvider } from 'ethers'
 
 export type ProviderInstance = BrowserProvider | JsonRpcProvider
 

@@ -1,24 +1,27 @@
-import { Contract, FunctionFragment, JsonRpcSigner } from 'ethers'
+import type { Signer } from 'ethers'
+import { Contract, FunctionFragment } from 'ethers'
 import type { ContractInstance, Function, MethodsRecord } from '../types/types'
 
 export * from 'ethers'
 
-export async function defineContract({ abi, address, provider, type = 'call' }: ContractInstance): Promise<Contract | undefined> {
+export async function defineContract({ abi, address, provider, type = 'query' }: ContractInstance): Promise<Contract | undefined> {
   try {
-    let contract: Contract
-    if (type === 'call' && provider) {
-      const signer = await provider.getSigner()
-      contract = new Contract(address, abi, signer)
+    if (type === 'call' && provider !== undefined) {
+      const signer: Signer = await provider.getSigner()
+      // eslint-disable-next-line no-console
+      console.log('signer', signer)
+      const contract: Contract = new Contract(address, abi, signer)
       // eslint-disable-next-line no-console
       console.log('contract', contract)
+      return contract
     }
     else {
-      contract = new Contract(address, abi, provider)
+      const contract: Contract = new Contract(address, abi, provider)
       // eslint-disable-next-line no-console
       console.log('contract', contract)
+      return contract
     }
-    
-    return contract
+
   }
   catch (error) {
     console.error(error)
@@ -26,7 +29,7 @@ export async function defineContract({ abi, address, provider, type = 'call' }: 
 }
 
 export function useContract<T extends Record<string, Function>>(
-  contract: Contract
+  contract: Contract,
 ): MethodsRecord<T> {
   const contractInterface = contract.interface
 

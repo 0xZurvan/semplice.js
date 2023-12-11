@@ -19,7 +19,7 @@
       "import": "./dist/address.esm.js",
       "require": "./dist/address.cjs.js"
     },
-    "./provider": {
+    "./runner": {
       "types": "./dist/runner.d.ts",
       "import": "./dist/runner.esm.js",
       "require": "./dist/runner.cjs.js"

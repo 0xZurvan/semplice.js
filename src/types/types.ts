@@ -1,4 +1,4 @@
-import type { BrowserProvider, JsonRpcProvider } from 'ethers'
+import type { BrowserProvider, JsonRpcProvider, Signer } from 'ethers'
 
 export type ProviderInstance = BrowserProvider | JsonRpcProvider
 
@@ -6,14 +6,14 @@ export interface ContractInstance {
   abi: ContractABI[]
   address: string
   provider?: ProviderInstance | undefined
-  type?: 'query' | 'call'
+  signer?: Signer | undefined
 }
 
 export interface Function<T extends unknown[] = unknown[], U = any> {
   (...args: T): Promise<U>
 }
 
-export type MethodsRecord<T extends Record<string, Function>> = {
+export type ContractMethods<T extends Record<string, Function>> = {
   [K in keyof T]: Function<Parameters<T[K]>, ReturnType<T[K]>>;
 }
 
@@ -33,3 +33,5 @@ interface ContractABI {
   stateMutability?: string
   type?: string
 }
+
+export interface Config extends ContractInstance {}

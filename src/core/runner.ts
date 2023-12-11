@@ -1,18 +1,13 @@
-import { ethers } from 'ethers'
+import { BrowserProvider, JsonRpcProvider } from 'ethers'
 import type { ProviderInstance } from '../types/types'
 
-export function defineProvider(endpoint?: string): ProviderInstance | undefined {
-  try {
-    let provider
-    if (endpoint)
-      provider = new ethers.JsonRpcProvider(endpoint)
-    else
-      provider = new ethers.BrowserProvider(window.ethereum)
+export function defineProvider(endpoint?: string): ProviderInstance {
+  let provider
+  if (endpoint)
+    provider = new JsonRpcProvider(endpoint)
+  else
+    provider = new BrowserProvider(window.ethereum)
 
-    return provider
-  }
-  catch (error) {
-    console.error(error)
-  }
+  return provider
 }
 

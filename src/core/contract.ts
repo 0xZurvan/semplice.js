@@ -1,50 +1,48 @@
-import type { Signer } from 'ethers'
-import { Contract, FunctionFragment } from 'ethers'
-import type { ContractInstance, Function, MethodsRecord } from '../types/types'
+import type { FunctionFragment, Signer } from 'ethers'
+import { Contract } from 'ethers'
+import type { Config, ContractMethods, Function } from '../types/types'
 
 export * from 'ethers'
 
-export async function defineContract({ abi, address, provider, type = 'query' }: ContractInstance): Promise<Contract | undefined> {
-  try {
-    if (type === 'call' && provider !== undefined) {
-      const signer: Signer = await provider.getSigner()
-      // eslint-disable-next-line no-console
-      console.log('signer', signer)
-      const contract: Contract = new Contract(address, abi, signer)
-      // eslint-disable-next-line no-console
-      console.log('contract', contract)
-      return contract
-    }
-    else {
-      const contract: Contract = new Contract(address, abi, provider)
-      // eslint-disable-next-line no-console
-      console.log('contract', contract)
-      return contract
-    }
-
+export function useConfig({ abi, address, provider }: Config): Config {
+  const config: Config = {
+    abi,
+    address,
+    provider,
   }
-  catch (error) {
-    console.error(error)
-  }
+  return config
 }
 
-export function useContract<T extends Record<string, Function>>(
-  contract: Contract,
-): MethodsRecord<T> {
-  const contractInterface = contract.interface
+export function useWriteContract(
+  config: Config,
+): ContractMethods<{ [methodName: string]: Function }> {
+  const contract = new Contract(config.address, config.abi, config.provider)
 
-  const methods: MethodsRecord<T> = contractInterface.fragments
-    .filter(fragment => fragment.type === 'function')
-    .reduce<MethodsRecord<T>>((acc, func) => {
-      if (FunctionFragment.isFunction(func)) {
-        const functionFragment = func as FunctionFragment
-        acc[functionFragment.name as keyof T] = async (...args: Parameters<T[keyof T]>) => {
-          const result = await contract[functionFragment.name](...args)
-          return result
-        }
+  const result: ContractMethods<{ [methodName: string]: Function }> = {}
+
+  const generateMethods = async () => {
+    const functionFragments = contract.interface.fragments.filter(
+      fragment => fragment.type === 'function',
+    ) as FunctionFragment[]
+
+    for (const functionFragment of functionFragments) {
+      const { name } = functionFragment
+
+      result[name] = async (...args: any[]) => {
+        if (!config.provider)
+          throw new Error('Provider is not defined in the configuration.')
+
+        const signer = await config.provider.getSigner()
+        const contractWithSigner = contract.connect(signer as Signer)
+
+        // Assertion (as any) is safe here because we confirmed that functionFragment.name is valid
+        const result = await (contractWithSigner as any)[name](...args)
+        return result
       }
-      return acc
-    }, {} as MethodsRecord<T>)
+    }
+  }
 
-  return methods
+  generateMethods()
+
+  return result
 }

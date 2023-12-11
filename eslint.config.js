@@ -25,5 +25,6 @@ export default antfu({
   },
   rules: {
     'perfectionist/sort-interfaces': 'error',
+    'no-console': 'off',
   },
 })

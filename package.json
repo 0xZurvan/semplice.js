@@ -1,9 +1,9 @@
 {
-  "name": "vite-dapp-plugin",
+  "name": "semplice.js",
   "author": "0xZurvan",
-  "description": "Web3 integration library built on top of ethers.js",
+  "description": "Web3 integration library built on top of ethers.js to help you integrate your contracts with simplicity",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": false,
   "types": "./dist/types-Y4ApQfgA.d.ts",
   "main": "./dist/contract.cjs.js",
@@ -26,7 +26,7 @@
     }
   },
   "scripts": {
-    "build": "tsup tsup-node ./src/core --dts --format cjs,esm --tsconfig tsconfig.json vite build",
+    "build": "tsup tsup-node ./src/core --dts --format cjs,esm --tsconfig tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest"
@@ -42,9 +42,7 @@
     "eslint": "^8.54.0",
     "eslint-plugin-perfectionist": "^2.5.0",
     "tsup": "*",
-    "typescript": "*",
-    "vite": "^5.0.0",
-    "vitest": "^0.34.6"
+    "typescript": "*"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

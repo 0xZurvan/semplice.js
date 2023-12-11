@@ -4,7 +4,7 @@ import type { Config, ContractMethods, Function } from '../types/types'
 
 export * from 'ethers'
 
-export function useConfig({ abi, address, provider }: Config): Config {
+export function defineConfig({ abi, address, provider }: Config): Config {
   const config: Config = {
     abi,
     address,
@@ -13,7 +13,7 @@ export function useConfig({ abi, address, provider }: Config): Config {
   return config
 }
 
-export function useWriteContract(
+export function useContract(
   config: Config,
 ): ContractMethods<{ [methodName: string]: Function }> {
   const contract = new Contract(config.address, config.abi, config.provider)

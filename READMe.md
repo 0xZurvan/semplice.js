@@ -1,10 +1,9 @@
  
 
 # Semplice.js 👌
-```
-v0.0.1
 
-```
+`v0.0.1`  `0xZurvan`
+
 Simplify contract integration with our Web3 library, powered by ethers.js. Seamlessly connect and integrate your contracts with unparalleled ease, elevating your Web3 experience without the unnecessary complexity.
 
 - **Ease of Use**: Execute your contract methods in just three simple steps.
@@ -37,8 +36,10 @@ const provider = defineProvider()
 ```TS
 // sempliceConfig.ts
 import { defineConfig, Config } from 'semplice.js'
+import { defineProvider } from 'semplice.js/runner'
 import ABI from './abi-example/ABI.json';
 
+const provider = defineProvider()
 export const contractAConfig: Config = defineConfig({
   abi: ABI.abi,
   address: '0x167BF45892ad66FD9c13e113239DDE96C9619259',
@@ -78,5 +79,60 @@ const callMethodC = async (address: string) => {
   await methodC(address)
 }
 
+
+```
+
+## Examples
+
+#### Vue example:
+```TS
+<script setup lang="ts">
+import { useContract, defineConfig } from 'semplice.js';
+import { connectWallet } from 'semplice.js/address';
+import { defineProvider } from 'semplice.js/runner';
+import { ref } from 'vue';
+import ABI from './abi-example/ABI.json';
+
+const address = ref<string>()
+const provider = defineProvider()
+
+const config = defineConfig({
+  abi: ABI.abi,
+  address: '0x167BF45892ad66FD9c13e113239DDE96C9619259',
+  provider: provider
+})
+
+const { buy, balanceOf } = useContract(config)
+
+const connect = async () => {
+  const data = await connectWallet()
+  if(data) 
+    address.value = data.address
+
+}
+
+const callBalance = async () => {
+  const balance = await balanceOf(address.value)
+  console.log('balance', balance)
+}
+
+
+const mint = async () => {
+  await buy(1)
+}
+
+
+</script>
+
+<template>
+  <div>
+    <h1>Hello</h1>
+    <button @click="connect">Connect Wallet</button>
+    <button @click="callBalance">Get balance</button>
+    <button @click="mint">Mint</button>
+
+    <p>{{ address }}</p>
+  </div>
+</template>
 
 ```

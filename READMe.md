@@ -11,6 +11,7 @@ Simplify contract integration with our Web3 library, powered by ethers.js. Seaml
 - **Type Availability**: Access all ethers.js and semplice.js types effortlessly.
 - **Reusability and Code Reduction**: Embrace reusability and code reduction for cleaner, more maintainable code.
 - **Framework and Library Friendly**: Integrate seamlessly with you choice of frameworks and libraries.
+- **CJS and MJS Support**: Fully supports both CommonJS (CJS) and ECMAScript Modules (MJS), providing flexibility for a wide range of project setups.
 
 
 ## Get started

@@ -1,7 +1,10 @@
  
 
-# semplice.js 👌
+# Semplice.js 👌
+```
+v0.0.1
 
+```
 Simplify contract integration with our Web3 library, powered by ethers.js. Seamlessly connect and integrate your contracts with unparalleled ease, elevating your Web3 experience without the unnecessary complexity.
 
 - **Ease of Use**: Execute your contract methods in just three simple steps.
@@ -11,7 +14,7 @@ Simplify contract integration with our Web3 library, powered by ethers.js. Seaml
 - **Framework and Library Friendly**: Integrate seamlessly with you choice of frameworks and libraries.
 
 
-## Installation
+## Get started
 
 ```
 npm install -D semplice.js
@@ -32,6 +35,7 @@ const provider = defineProvider()
 > **NOTE**:  You can add your contract configuration object directly in your components or in a separate file.
 
 ```TS
+// sempliceConfig.ts
 import { defineConfig, Config } from 'semplice.js'
 import ABI from './abi-example/ABI.json';
 
@@ -55,7 +59,6 @@ export const contractBConfig: Config = defineConfig({
 // Add your configs
 import { contractAConfig, contractBConfig } from 'sempliceConfig.ts'
 // Add useContract to extract the methods 
-// your want to use from your contracts
 import { useContract } from 'semplice.js'
 
 // Pass your configs to useContract and destructure your methods

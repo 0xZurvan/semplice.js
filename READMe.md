@@ -42,6 +42,7 @@ import ABI from './abi-example/ABI.json';
 const provider = defineProvider()
 export const contractAConfig: Config = defineConfig({
   abi: ABI.abi,
+  // Contract address
   address: '0x167BF45892ad66FD9c13e113239DDE96C9619259',
   provider: provider
 })
@@ -98,6 +99,7 @@ const provider = defineProvider()
 
 const config = defineConfig({
   abi: ABI.abi,
+  // Contract address
   address: '0x167BF45892ad66FD9c13e113239DDE96C9619259',
   provider: provider
 })
@@ -111,7 +113,7 @@ const connect = async () => {
 
 }
 
-const callBalance = async () => {
+const getBalance = async () => {
   const balance = await balanceOf(address.value)
   console.log('balance', balance)
 }
@@ -126,13 +128,61 @@ const mint = async () => {
 
 <template>
   <div>
-    <h1>Hello</h1>
+    <h1>Vue Example</h1>
     <button @click="connect">Connect Wallet</button>
-    <button @click="callBalance">Get balance</button>
+    <button @click="getBalance">Get balance</button>
     <button @click="mint">Mint</button>
 
     <p>{{ address }}</p>
   </div>
 </template>
+
+```
+
+#### React example:
+```TS
+import { useContract, defineConfig } from 'semplice.js';
+import { connectWallet } from 'semplice.js/address';
+import { defineProvider } from 'semplice.js/runner';
+import { useState } from 'react';
+import ABI from './abi-example/ABI.json';
+
+export default function Example() {
+  const [address, setAddress] = useState('')
+  const provider = defineProvider() 
+
+  const config = defineConfig({
+    abi: ABI.abi,
+    // Contract address
+    address: '0x167BF45892ad66FD9c13e113239DDE96C9619259',
+    provider: provider
+  })
+
+  const { buy, balanceOf } = useContract(config)
+
+  const connect = async () => {
+    const data = await connectWallet()
+    if(data) 
+      setAddress(data.address)
+  }
+
+  const getBalance = async () => {
+    const balance = await balanceOf(address)
+    console.log('balance', balance)
+  }
+  
+  const mint = async () => {
+    await buy(1)
+  }
+
+  return (
+    <div>
+      <h1>React Example</h1>
+      <button onClick={connect}>Connect Wallet</button>
+      <button onClick={getBalance}>Get balance</button>
+      <button onClick={mint}>Mint</button>
+    </div>
+  )
+}
 
 ```

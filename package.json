@@ -1,6 +1,7 @@
 {
   "name": "semplice.js",
   "author": "0xZurvan",
+  "license": "MIT",
   "description": "Web3 integration library built on top of ethers.js to help you integrate your contracts with simplicity",
   "type": "module",
   "version": "0.0.1",

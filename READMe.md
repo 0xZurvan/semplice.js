@@ -17,7 +17,8 @@ Simplify contract integration with our Web3 library, powered by ethers.js. Seaml
 ## Get started
 
 ```
-npm install -D semplice.js
+// Install
+npm install semplice.js
 
 ```
 

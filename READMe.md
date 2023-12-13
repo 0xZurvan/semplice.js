@@ -102,9 +102,9 @@ export interface Options {
 
 ```TS
 // Add your configs
-import { contractAConfig, contractBConfig, Options } from 'sempliceConfig.ts'
-// Add useContract to extract the methods 
-import { useContract } from 'semplice.js'
+import { contractAConfig, contractBConfig } from 'sempliceConfig.ts'
+// Add useContract to extract the methods and Options
+import { useContract, Options } from 'semplice.js'
 
 // Pass your configs to useContract and destructure your methods
 const { methodA, methodB } = useContract(contractAConfig)
@@ -142,9 +142,9 @@ setValue(value: string | number, unit: Unit)
 
 ```TS
 // Add your configs
-import { contractAConfig, contractBConfig, Options, setVAlue } from 'sempliceConfig.ts'
-// Add useContract to extract the methods 
-import { useContract } from 'semplice.js'
+import { contractAConfig, contractBConfig } from 'sempliceConfig.ts'
+// Add useContract to extract the methods Options, and setValue
+import { useContract, Options, setValue } from 'semplice.js'
 
 // Pass your configs to useContract and destructure your methods
 const { methodA, methodB } = useContract(contractAConfig)

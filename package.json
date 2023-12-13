@@ -6,28 +6,28 @@
   "type": "module",
   "version": "0.0.1",
   "private": false,
-  "types": "./dist/types-Y4ApQfgA.d.ts",
-  "main": "./dist/contract.cjs.js",
-  "module": "./dist/contract.esm.js",
+  "types": "./dist/types-2O3uZphu.d.ts",
+  "main": "./dist/contract.js",
+  "module": "./dist/esm/contract.js",
   "exports": {
     ".": {
       "types": "./dist/contract.d.ts",
-      "import": "./dist/contract.esm.js",
-      "require": "./dist/contract.cjs.js"
+      "import": "./dist/esm/contract.js",
+      "require": "./dist/contract.js"
     },
     "./address": {
       "types": "./dist/address.d.ts",
-      "import": "./dist/address.esm.js",
-      "require": "./dist/address.cjs.js"
+      "import": "./dist/esm/address.js",
+      "require": "./dist/address.js"
     },
     "./runner": {
       "types": "./dist/runner.d.ts",
-      "import": "./dist/runner.esm.js",
-      "require": "./dist/runner.cjs.js"
+      "import": "./dist/esm/runner.js",
+      "require": "./dist/runner.js"
     }
   },
   "scripts": {
-    "build": "tsup tsup-node ./src/core --dts --format cjs,esm --tsconfig tsconfig.json",
+    "build": "tsup tsup-node ./src/core --dts --format cjs,esm --tsconfig tsconfig.json --legacy-output",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest"

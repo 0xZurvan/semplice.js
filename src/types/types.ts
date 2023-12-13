@@ -1,4 +1,4 @@
-import type { BrowserProvider, JsonRpcProvider, Signer } from 'ethers'
+import type { BigNumberish, BrowserProvider, JsonRpcProvider, Signer } from 'ethers'
 
 export type ProviderInstance = BrowserProvider | JsonRpcProvider
 
@@ -35,3 +35,12 @@ interface ContractABI {
 }
 
 export interface Config extends ContractInstance {}
+
+export type Unit = 'wei' | 'kwei' | 'mwei' | 'gwei' | 'szabo' | 'finney' | 'ether';
+
+export interface Options {
+  gasLimit?: string | number
+  maxGasLimit?: string | number
+  nonce?: number | undefined
+  value?: bigint
+}

@@ -1,8 +1,9 @@
 import type { FunctionFragment, Signer } from 'ethers'
-import { Contract } from 'ethers'
-import type { Config, ContractMethods, Function } from '../types/types'
+import { Contract, ethers } from 'ethers'
+import type { Config, ContractMethods, Function, Unit } from '../types/types'
 
 export * from 'ethers'
+export * from '../types/types'
 
 export function defineConfig({ abi, address, provider }: Config): Config {
   const config: Config = {
@@ -35,7 +36,6 @@ export function useContract(
         const signer = await config.provider.getSigner()
         const contractWithSigner = contract.connect(signer as Signer)
 
-        // Assertion (as any) is safe here because we confirmed that functionFragment.name is valid
         const result = await (contractWithSigner as any)[name](...args)
         return result
       }
@@ -45,4 +45,12 @@ export function useContract(
   generateMethods()
 
   return result
+}
+
+export function setValue(value: string | number, unit: Unit) {
+  const formattedValue: bigint = typeof value === 'number'
+    ? ethers.parseUnits(value.toString(), unit)
+    : ethers.parseUnits(value, unit)
+
+  return formattedValue
 }

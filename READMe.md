@@ -2,7 +2,7 @@
 
 # Semplice.js 👌
 
-`v0.0.1`  `0xZurvan`
+`v0.0.2`  `0xZurvan`
 
 Simplify contract integration with our Web3 library, powered by ethers.js. Seamlessly connect and integrate your contracts with unparalleled ease, elevating your Web3 experience without the unnecessary complexity.
 
@@ -84,13 +84,98 @@ const callMethodC = async (address: string) => {
 
 
 ```
+### Options object and setValue for payable functions
+
+#### Options Interface definition:
+
+```TS
+export interface Options {
+  gasLimit?: string | number
+  maxGasLimit?: string | number
+  nonce?: number | undefined
+  value?: bigint
+}
+
+```
+
+#### Options usage:
+
+```TS
+// Add your configs
+import { contractAConfig, contractBConfig, Options } from 'sempliceConfig.ts'
+// Add useContract to extract the methods 
+import { useContract } from 'semplice.js'
+
+// Pass your configs to useContract and destructure your methods
+const { methodA, methodB } = useContract(contractAConfig)
+const { methodC } = useContract(contractBConfig)
+
+// Call your function in JSX, Vue template, etc
+const callMethodA = async (amount: number) => {
+  await methodA(amount)
+}
+
+const callMethodB = async (amount: number) => {
+  await methodB(amount)
+}
+
+const callMethodC = async (address: string) => {
+  const options: Options = {
+    gasLimit: '500000'
+  }
+
+  await methodC(address, options)
+}
+
+```
+
+#### setValue unit type definition and arguments:
+
+```TS
+export type Unit = 'wei' | 'kwei' | 'mwei' | 'gwei' | 'szabo' | 'finney' | 'ether';
+
+setValue(value: string | number, unit: Unit)
+
+```
+
+#### setValue usage:
+
+```TS
+// Add your configs
+import { contractAConfig, contractBConfig, Options, setVAlue } from 'sempliceConfig.ts'
+// Add useContract to extract the methods 
+import { useContract } from 'semplice.js'
+
+// Pass your configs to useContract and destructure your methods
+const { methodA, methodB } = useContract(contractAConfig)
+const { methodC } = useContract(contractBConfig)
+
+// Call your function in JSX, Vue template, etc
+const callMethodA = async (amount: number) => {
+  await methodA(amount)
+}
+
+const callMethodB = async (amount: number) => {
+  await methodB(amount)
+}
+
+const callMethodC = async (address: string) => {
+  const options: Options = {
+    gasLimit: '500000' // 500000
+    value: setValue(0.001, 'finney') // setValue('0.001', 'finney')
+  }
+
+  await methodC(address, options)
+}
+
+```
 
 ## Examples
 
 #### Vue example:
 ```TS
 <script setup lang="ts">
-import { useContract, defineConfig } from 'semplice.js';
+import { useContract, defineConfig, Options, setValue } from 'semplice.js';
 import { connectWallet } from 'semplice.js/address';
 import { defineProvider } from 'semplice.js/runner';
 import { ref } from 'vue';
@@ -122,7 +207,12 @@ const getBalance = async () => {
 
 
 const mint = async () => {
-  await buy(1)
+  const options: Options = {
+    gasLimit: '500000'
+    value: setValue('0.5', 'ether')
+  }
+
+  await buy(1, options)
 }
 
 
@@ -143,7 +233,7 @@ const mint = async () => {
 
 #### React example:
 ```TS
-import { useContract, defineConfig } from 'semplice.js';
+import { useContract, defineConfig, Options, setValue } from 'semplice.js';
 import { connectWallet } from 'semplice.js/address';
 import { defineProvider } from 'semplice.js/runner';
 import { useState } from 'react';
@@ -174,7 +264,12 @@ export default function Example() {
   }
   
   const mint = async () => {
-    await buy(1)
+    const options: Options = {
+      gasLimit: 500000
+      value: setValue('1000', 'kwei')
+    }
+
+    await buy(1, options)
   }
 
   return (

@@ -2,13 +2,13 @@
 
 # Semplice.js 👌
 
-`v0.0.2`  `0xZurvan` [`NPM`](https://www.npmjs.com/package/semplice.js) [`GITHUB`](https://github.com/0xZurvan/semplice.js)
+`v0.0.2`  `0xZurvan` [`npm`](https://www.npmjs.com/package/semplice.js) [`GitHub`](https://github.com/0xZurvan/semplice.js)
 
 Simplify contract integration with our Web3 library, powered by ethers.js. Seamlessly connect and integrate your contracts with unparalleled ease, elevating your Web3 experience without the unnecessary complexity.
 
 - **Ease of Use**: Execute your contract methods in just three simple steps.
 - **TypeScript Support**: Enjoy full compatibility with TypeScript for enhanced development workflows.
-- **Type Availability**: Access all ethers.js and semplice.js types effortlessly.
+- **Types Availability**: Access all ethers.js and semplice.js types effortlessly.
 - **Reusability and Code Reduction**: Embrace reusability and code reduction for cleaner, more maintainable code.
 - **Framework and Library Friendly**: Integrate seamlessly with you choice of frameworks and libraries.
 - **CJS and MJS Support**: Fully supports both CommonJS (CJS) and ECMAScript Modules (MJS), providing flexibility for a wide range of project setups.

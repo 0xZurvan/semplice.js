@@ -12,6 +12,10 @@
     "skipLibCheck": true,
     "outDir": "./dist",
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "semplice.js/*": ["src/core/*"]
+    }
   }
 }

@@ -4,7 +4,7 @@
   "license": "MIT",
   "description": "Web3 integration library built on top of ethers.js to help you integrate your contracts with simplicity",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "types": "./dist/types-2O3uZphu.d.ts",
   "main": "./dist/contract.js",

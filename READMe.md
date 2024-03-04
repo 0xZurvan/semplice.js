@@ -2,7 +2,7 @@
 
 # Semplice.js 👌
 
-`v0.0.2`  `0xZurvan` [`npm`](https://www.npmjs.com/package/semplice.js) [`GitHub`](https://github.com/0xZurvan/semplice.js)
+`v0.0.3`  `0xZurvan` [`npm`](https://www.npmjs.com/package/semplice.js) [`GitHub`](https://github.com/0xZurvan/semplice.js)
 
 Simplify contract integration with our Web3 library, powered by ethers.js. Seamlessly connect and integrate your contracts with unparalleled ease, elevating your Web3 experience without the unnecessary complexity.
 
